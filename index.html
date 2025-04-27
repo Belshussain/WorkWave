@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkWave - Explore Services</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f8fb;
+            color: #333;
+            padding-top: 56px;
+            transition: background-color 0.5s ease;
+        }
+
+        .navcolour {
+            background-color: #2b2d42 !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .service-card .card-body {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .index-buttons .btn {
+            font-size: 1.1rem;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        .index-buttons .btn-primary {
+            background-color: #ff6347;
+        }
+
+        .index-buttons .btn-primary:hover {
+            background-color: #e5533d;
+        }
+
+        .index-buttons .btn-warning {
+            background-color: #ffcc00;
+        }
+
+        .index-buttons .btn-warning:hover {
+            background-color: #e6b800;
+        }
+
+        .testimonial {
+            background-color: #f9f9f9;
+            padding: 60px 0;
+        }
+
+        .testimonial .carousel-item {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .testimonial .carousel-item img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial .carousel-control-prev-icon, .testimonial .carousel-control-next-icon {
+            background-color: #ff6347;
+        }
+
+        .faq-section {
+            background-color: #2b2d42;
+            color: white;
+            padding: 60px 0;
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            background-color: white;
+            color: black;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item h5 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #2b2d42;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .scroll-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff6347;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 2rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-btn.show {
+            display: block;
+        }
+    </style>
+</head>
+<body data-aos-easing="ease-in-out">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navcolour fixed-top" data-aos="fade-down">
+        <div class="container">
+            <a class="navbar-brand" href="#">WorkWave</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="create_account.html">Create Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" data-aos="zoom-in">
+        <h1>Welcome to WorkWave</h1>
+        <p>Find reliable local services or become a seller and offer your expertise.</p>
+        <div class="index-buttons">
+            <a href="login.html" class="btn btn-primary btn-lg">Browse Services</a>
+            <a href="service_request.html" class="btn btn-warning btn-lg">Become a Seller</a>
+        </div>
+    </section>
+
+    <!-- Service Section -->
+    <div class="container py-5">
+        <h2 class="text-center mb-4" data-aos="fade-up">Explore Our Featured Services</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col" data-aos="flip-left">
+                <div class="service-card">
+                    <img src="./default-images/plumber-working-mpi23wi001wg.webp" alt="Plumbing Services">
+                    <div class="card-body">
+                        <h5 class="card-title">Plumbing Services</h5>
+                        <p>Reliable plumbers for your home repairs and installations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-aos="flip-left" data-aos-delay="100">
+                <div class="service-card">
+                    <img src="default-images/electric.jpg" alt="Electricians">
+                    <div class="card-body">
+                        <h5 class="card-title">Electricians</h5>
+                        <p>Get quick electrical fixes from certified electricians.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-aos="flip-left" data-aos-delay="200">
+                <div class="service-card">
+                    <img src="./default-images/cleaning.jpg" alt="Cleaning Services">
+                    <div class="card-body">
+                        <h5 class="card-title">Cleaning Services</h5>
+                        <p>Professional cleaning for homes, offices, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Customers Say</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./ITECA first project stuff/assets/css/images/jason person.jpg" alt="Jason Meyers">
+                        <p>"WorkWave has made finding services so much easier! Highly recommend."</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./ITECA first project stuff/assets/css/images/Annie grey.jpg" alt="Annie Grey">
+                        <p>"Fantastic experience. I found the best plumber in town through WorkWave."</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./ITECA first project stuff/assets/css/images/victoria smith.jpg" alt="Victoria Smith">
+                        <p>"I love how easy it is to become a seller on WorkWave. Great platform."</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" data-aos="fade-up">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h5>How do I sign up?</h5>
+                <p>Click on the "Create Account" button at the top and fill in your details to get started.</p>
+            </div>
+            <div class="faq-item">
+                <h5>How do I become a seller?</h5>
+                <p>Simply sign up and create your service profile to start offering your services!</p>
+            </div>
+            <div class="faq-item">
+                <h5>Are the services guaranteed?</h5>
+                <p>We ensure our sellers are reliable and trustworthy, but we recommend reviewing customer ratings before booking.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" data-aos="fade-up">
+        <p>&copy; 2025 WorkWave. All rights reserved. <br>
+        <a href="privacy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-btn" id="scrollBtn" onclick="scrollToTop()">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000, 
+            once: true       
+        });
+
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                document.getElementById("scrollBtn").classList.add("show");
+            } else {
+                document.getElementById("scrollBtn").classList.remove("show");
+            }
+        };
+
+        
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+</body>
+</html>

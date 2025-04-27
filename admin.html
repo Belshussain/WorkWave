@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | WorkWave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .navcolour {
+            background-color: #2b2d42 !important;
+        }
+
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2b2d42;
+            font-weight: bold;
+            margin-top: 80px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2b2d42;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead {
+            background: #2b2d42;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-approve {
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .btn-approve:hover {
+            background-color: #218838;
+        }
+
+        .btn-reject {
+            background-color: #dc3545;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .btn-reject:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navcolour fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">WorkWave</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Welcome Message -->
+    <h1>Welcome to the Admin Dashboard</h1>
+
+    <!-- Service Requests Table -->
+    <div class="container mt-5 dashboard-container">
+        <h2>Service Requests</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Email</th>
+                        <th>Service Type</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="requests-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Fetch service requests from backend
+        window.onload = async function() {
+            try {
+                const response = await fetch('http://localhost:5001/admin/service-requests');
+                const requests = await response.json();
+
+                const tableBody = document.getElementById("requests-table");
+                tableBody.innerHTML = '';
+
+                requests.forEach(request => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${request.first_name} ${request.last_name}</td>
+                        <td>${request.email}</td>
+                        <td>${request.service_type}</td>
+                        <td>${request.location}</td>
+                        <td>${request.description}</td>
+                        <td>${request.status}</td>
+                        <td>
+                            ${request.status === "pending" ? `
+                                <button class="btn btn-approve" onclick="approveRequest(${request.id})">Approve</button>
+                                <button class="btn btn-reject" onclick="rejectRequest(${request.id})">Reject</button>
+                            ` : request.status}
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error fetching service requests:", error);
+            }
+        };
+
+        // Approve Service Request
+        async function approveRequest(requestId) {
+            const response = await fetch(`http://localhost:5001/admin/approve/${requestId}`, { method: 'POST' });
+            if (response.ok) {
+                alert('Service request approved!');
+                window.onload();  // Reload the data
+            } else {
+                alert('Error approving request');
+            }
+        }
+
+        // Reject Service Request
+        async function rejectRequest(requestId) {
+            const response = await fetch(`http://localhost:5001/admin/reject/${requestId}`, { method: 'POST' });
+            if (response.ok) {
+                alert('Service request rejected!');
+                window.onload();  // Reload the data
+            } else {
+                alert('Error rejecting request');
+            }
+        }
+    </script>
+</body>
+</html>
