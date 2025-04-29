@@ -11,7 +11,8 @@ const session = require('express-session'); // Import express-session
 const fs = require('fs'); // Import fs to check if uploads folder exists
 
 const app = express();
-const port = 5001;
+const port = process.env.PORT || 5001;
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -179,4 +180,4 @@ app.get('/services', (req, res) => {
 });
 
 // Start Server
-app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server running on port ${port}`));
