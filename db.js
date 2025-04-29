@@ -1,12 +1,18 @@
-const { Pool } = require('pg');
+const mysql = require('mysql2');
 
-const pool = new Pool({
-  host: 'dpg-d0797f9r0fns738brrs0-a.oregon-postgres.render.com',
-  user: 'zubair_h',
-  password: 'RguNHJH3eYAxkLMExdm8zbmiYBsYM7um',
-  database: 'workwave_db_wbqw',
-  port: 5432,
-  ssl: { rejectUnauthorized: false }
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '@Mysql25', 
+    database: 'workwave_db'
 });
 
-module.exports = pool;
+db.connect(err => {
+    if (err) {
+        console.error('Database connection failed:', err);
+        return;
+    }
+    console.log('Connected to the database');
+});
+
+module.exports = db;
