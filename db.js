@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
@@ -8,4 +9,4 @@ const pool = mysql.createPool({
   port: process.env.DB_PORT
 });
 
-module.exports = pool.promise(); // Optional: use `.promise()` for async/await
+module.exports = pool.promise(); // So you can use async/await
