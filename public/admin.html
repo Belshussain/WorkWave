@@ -135,15 +135,19 @@
     </div>
 
     <script>
+        const API_BASE = location.hostname === "localhost"
+            ? "http://localhost:5001"
+            : "https://workwave-production-fbee.up.railway.app";
+    
         // Fetch service requests from backend
-        window.onload = async function() {
+        window.onload = async function () {
             try {
-                const response = await fetch('http://localhost:5001/admin/service-requests');
+                const response = await fetch(`${API_BASE}/admin/service-requests`);
                 const requests = await response.json();
-
+    
                 const tableBody = document.getElementById("requests-table");
                 tableBody.innerHTML = '';
-
+    
                 requests.forEach(request => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
@@ -166,28 +170,43 @@
                 console.error("Error fetching service requests:", error);
             }
         };
-
+    
         // Approve Service Request
         async function approveRequest(requestId) {
-            const response = await fetch(`http://localhost:5001/admin/approve/${requestId}`, { method: 'POST' });
-            if (response.ok) {
-                alert('Service request approved!');
-                window.onload();  // Reload the data
-            } else {
-                alert('Error approving request');
+            try {
+                const response = await fetch(`${API_BASE}/admin/approve/${requestId}`, {
+                    method: 'POST'
+                });
+                if (response.ok) {
+                    alert('Service request approved!');
+                    window.onload();  // Reload the data
+                } else {
+                    alert('Error approving request');
+                }
+            } catch (error) {
+                console.error('Approve Error:', error);
+                alert('Failed to approve service.');
             }
         }
-
+    
         // Reject Service Request
         async function rejectRequest(requestId) {
-            const response = await fetch(`http://localhost:5001/admin/reject/${requestId}`, { method: 'POST' });
-            if (response.ok) {
-                alert('Service request rejected!');
-                window.onload();  // Reload the data
-            } else {
-                alert('Error rejecting request');
+            try {
+                const response = await fetch(`${API_BASE}/admin/reject/${requestId}`, {
+                    method: 'POST'
+                });
+                if (response.ok) {
+                    alert('Service request rejected!');
+                    window.onload();  // Reload the data
+                } else {
+                    alert('Error rejecting request');
+                }
+            } catch (error) {
+                console.error('Reject Error:', error);
+                alert('Failed to reject service.');
             }
         }
     </script>
+    
 </body>
 </html>
